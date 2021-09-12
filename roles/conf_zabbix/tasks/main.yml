@@ -9,6 +9,14 @@
     name: httpd
     state: restarted
 
+- name: print something
+  lineinfile:
+     path: /etc/zabbix/zabbix_server.conf
+     regexp: 'DBUser' 
+     line: 'DBUser=muhannad'
+     state: present
+
+
 - name: import sql file
   tags: sql
   shell: 
@@ -16,21 +24,51 @@
     cmd: zcat create.sql.gz |  mysql -u muhannad -p1212 zabbix_db
 
 
+#- name: edit zabbix config 
+#  lineinfile:
+#     path: /etc/zabbix/zabbix_server.conf
+#     regexp: '{{ item.From }}'
+#     line: '{{ item.To }}'
+#     state: present
+#   with_items:
+#        - { From: 'DBHost' , To: 'DBHost=localhost' }
+#        - { From: 'DBName' , To: 'DBName=zabbix_db' }
+#        - { From: 'DBUser' , To: 'DBUser=muhannad' }
+#        - { From: 'DBPassword' , To: 'DBPassword=1212' }
+
+- name: make zabbbix configure file from template
+  template:
+    src: zabbix_server.conf.j2
+    dest: /etc/zabbix/zabbix_server.conf  
+
+- name: restart zabbix_server service
+  service:
+    name: zabbix-server
+    state: restarted
+    enabled: yes
+
+- name: permit traffic in default zone for https service
+  tags: firewalld
+  firewalld:
+    service: "{{item}}"
+    permanent: yes
+    state: enabled
+  with_items:
+    - http
+    - https
+
+
+- name: open ports
+  tags: firewalld
+  firewalld:
+    port: "{{item}}"
+    permanent: yes
+    state: enabled
+  with_items:
+    - 10051/tcp
+    - 10050/tcp 
+  notify: reload_firewall , restart_httpd
 
 
 
-
-
-- name: edit zabbix config 
-  lineinfile:
-    - path: /etc/zabbix/zabbix_server.conf
-    - regexp: '{{ item.From }}'
-    - line: '{{ item.To }}'
-    - state: present
-    - with_items:
-        - { From: 'DBHost' , To: 'localhost' }
-        - { From: 'DBName' , To: 'zabbix_db' }
-        - { From: 'DBUser' , To: 'muhannad' }
-        - { From: 'DBPassword' , To: '1212' }
-
-
+ 

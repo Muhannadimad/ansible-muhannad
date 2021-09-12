@@ -13,7 +13,25 @@
 - name: Enable MariaDB on system boot.
   command: systemctl enable mariadb
 
-- name: mariadb more secure 
-  shell: mysql_secure_installation --password-stdin 
-  args:
-    stdin: 1212
+#- name: mariadb more secure 
+#  shell: mysql_secure_installation --password-stdin 
+#  args:
+#    stdin: 1212
+
+- name: Case insensitive password string match
+  tags: password
+  vars: 
+    ansible_python_interpreter: /usr/bin/python3
+  expect:
+    command: echo | mysql_secure_installation
+    responses:
+       Question:
+         - 121212
+         - echo
+         - y
+         - 1212
+         - 1212
+         - y 
+         - n
+         - n
+         - y

@@ -1,0 +1,4 @@
+DBHost: local
+DBUser: muhannad
+DBPassword: 1212
+DBName: zabbix_db
