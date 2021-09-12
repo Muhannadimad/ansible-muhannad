@@ -21,10 +21,6 @@
 ├── install_requirements.yml
 ├── install_zabbix.yml
 ├── inventory
-├── pexpect
-│   ├── info_idpl_55435118_distro_opensuse_com_python3-pexpect3-3.1-4.1.x86_64.rpm
-│   ├── info_idpl_55435118_distro_opensuse_com_python3-pexpect3-3.1-4.1.x86_64.rpm.html
-│   └── python-pexpect-4.8.0-1-omv4050.noarch.rpm
 ├── README.md
 ├── roles
 │   ├── apache
