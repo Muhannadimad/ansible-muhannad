@@ -5,6 +5,7 @@
 - Ansible
 
 ## structure ##
+```
 .
 ├── ansible.cfg
 ├── conf_zabbix.yml
@@ -74,3 +75,4 @@
 │           └── main.yml
 ├── selinux.yml
 └── site.yml
+```
