@@ -1,0 +1,19 @@
+- name: Install mariaDB
+  yum: 
+    name: mariadb-server
+    disablerepo: "*"
+    enablerepo: "remi"
+
+
+- name: Start the MariaDB service
+  service: 
+    name: mariadb.service
+    state: started
+
+- name: Enable MariaDB on system boot.
+  command: systemctl enable mariadb
+
+- name: mariadb more secure 
+  shell: mysql_secure_installation --password-stdin 
+  args:
+    stdin: 1212

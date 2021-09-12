@@ -1,0 +1,36 @@
+- name: Change time
+  lineinfile:
+    path: /etc/httpd/conf.d/zabbix.conf
+    regexp: 'Europe/Riga'
+    line: php_value date.timezone Asia/Gaza
+
+- name: restart httpd
+  service: 
+    name: httpd
+    state: restarted
+
+- name: import sql file
+  tags: sql
+  shell: 
+    chdir: /usr/share/doc/zabbix-server-mysql-4.0.33/ 
+    cmd: zcat create.sql.gz |  mysql -u muhannad -p1212 zabbix_db
+
+
+
+
+
+
+
+- name: edit zabbix config 
+  lineinfile:
+    - path: /etc/zabbix/zabbix_server.conf
+    - regexp: '{{ item.From }}'
+    - line: '{{ item.To }}'
+    - state: present
+    - with_items:
+        - { From: 'DBHost' , To: 'localhost' }
+        - { From: 'DBName' , To: 'zabbix_db' }
+        - { From: 'DBUser' , To: 'muhannad' }
+        - { From: 'DBPassword' , To: '1212' }
+
+

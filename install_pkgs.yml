@@ -1,0 +1,14 @@
+---
+
+- hosts: zabbix_server
+  become: true
+  roles: 
+    - install_pkgs_server
+
+
+- hosts: zabbix_agent
+  become: true
+  roles: 
+    - install_pkgs_client
+
+

@@ -1,0 +1,6 @@
+---
+
+- hosts: local
+  name: change selinux 
+  roles:
+    - selinux 

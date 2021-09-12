@@ -1,0 +1,21 @@
+- name: install MySQL-python (dependicies)
+  yum: 
+    name: MySQL-python 
+    state: latest
+
+- name: Create a new database with name 'zabbix_db'
+  community.mysql.mysql_db:
+    name: zabbix_db
+    state: present
+
+- name: Create database user with name 'muhannad' and password '1212' with all database privileges
+  community.mysql.mysql_user:
+    name: muhannad
+    password: 1212
+    priv: '*.*:ALL'
+    state: present
+
+- name: Reload privilege tables
+  command: 'mysql -ne "{{ item }}"'
+  with_items:
+    - FLUSH PRIVILEGES

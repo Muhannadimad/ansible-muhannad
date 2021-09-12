@@ -1,0 +1,6 @@
+---
+
+- hosts: local
+  name: install mariadb
+  roles:
+    - install_mariadb

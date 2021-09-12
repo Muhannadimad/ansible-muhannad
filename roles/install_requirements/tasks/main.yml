@@ -1,0 +1,9 @@
+- name: Install epel pkgs
+  yum:
+    name: ["epel-release" , "http://rpms.remirepo.net/enterprise/remi-release-7.rpm" ]
+
+- name: Enable latest php repo
+  command: "{{ item }}"
+  with_items:
+    - "yum-config-manager --disable remi-php54"
+    - "yum-config-manager --enable remi-php72"

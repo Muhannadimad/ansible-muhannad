@@ -1,0 +1,8 @@
+- name: Ensure SELinux is set to permissive  mode
+  lineinfile:
+    path: /etc/selinux/config
+    regexp: '^SELINUX='
+    line: SELINUX=permissive
+
+- name: Set SELINUX to permissive mode in runtime
+  command: setenforce 0 

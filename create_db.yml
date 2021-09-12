@@ -1,0 +1,6 @@
+---
+
+- hosts: local
+  name: create DB
+  roles:
+    - create_db

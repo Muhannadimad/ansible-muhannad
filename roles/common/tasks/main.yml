@@ -1,0 +1,16 @@
+- name: create zabbix repo
+  yum_repository:
+    name: my_zabbix
+    baseurl: http://172.20.51.181/zabbix_pkgs
+    gpgcheck: no
+    enabled: yes
+    description: myrepo zabbix
+
+
+- name: clean yum cash
+  command: yum clean all 
+
+ 
+
+
+

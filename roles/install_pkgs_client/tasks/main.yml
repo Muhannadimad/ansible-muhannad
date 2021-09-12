@@ -1,0 +1,5 @@
+- name: install zabbix pkgs on client  
+  yum: 
+    name: ['zabbix-agent']
+    enablerepo: "my_zabbix"
+    disablerepo: "*" 

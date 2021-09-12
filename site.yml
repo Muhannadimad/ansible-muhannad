@@ -1,0 +1,12 @@
+---
+
+- hosts: local
+  become: true
+  roles:
+    - local
+
+- hosts: all
+  become: true
+  roles:
+    - common
+

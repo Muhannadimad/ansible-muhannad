@@ -1,0 +1,7 @@
+---
+
+- hosts: local 
+  name: install php pkgs
+  roles:
+    - install_php 
+    

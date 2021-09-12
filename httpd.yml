@@ -1,0 +1,6 @@
+---
+
+- hosts: local
+  name: httpd
+  roles:
+    - apache

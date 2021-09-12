@@ -1,0 +1,21 @@
+---
+
+- name: yum_repo_setup
+  hosts: local
+  tasks:
+     - name: move rpm's to www
+       copy:
+         src: ~/task-ansible
+         dest: /var/www
+
+     - name: create repodata
+       command: createrepo /var/www/task-ansible
+
+     - name: create zabbix repo 
+       yum_repository:
+             name: my_zabbix
+             baseurl: 172.20.51.181:///var/www/task-ansible/zabbix_pkgs
+             gpgcheck: no
+             enabled: yes
+
+

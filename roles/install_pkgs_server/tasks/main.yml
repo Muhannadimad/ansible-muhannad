@@ -1,0 +1,6 @@
+- name: install zabbix pkgs on server
+  yum: 
+    name: ['zabbix' , 'zabbix-server' , 'zabbix-web']
+    enablerepo: "my_zabbix"
+    disablerepo: "*" 
+

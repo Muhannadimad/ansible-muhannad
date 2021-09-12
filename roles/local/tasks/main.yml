@@ -1,0 +1,8 @@
+- name: move rpm's to www
+  copy:
+    src: ~/zabbix_pkgs
+    dest: /var/www/html
+
+- name: create repodata
+  command: createrepo /var/www/html/zabbix_pkgs
+

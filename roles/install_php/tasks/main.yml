@@ -1,0 +1,10 @@
+- name: Install php pkgs  
+  yum: 
+    name: ['php', 'php-pear', 'php-cgi', 'php-common', 'php-mbstring', 'php-snmp', 'php-gd', 'php-pecl-mysql', 'php-xml', 'php-mysql', 'php-gettext', 'php-bcmath']
+
+- name: Change time
+  lineinfile:
+    path: /etc/php.ini
+    regexp: '^;date.timezone'
+    line: date.timezone=Asia/Gaza
+

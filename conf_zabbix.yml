@@ -1,0 +1,6 @@
+---
+
+- hosts: local
+  name: configure zabbix
+  roles:
+    - conf_zabbix
