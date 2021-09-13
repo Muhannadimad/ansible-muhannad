@@ -76,3 +76,22 @@
 ├── selinux.yml
 └── site.yml
 ```
+## roles ##
+- apache: configure apache in local
+- local: move .rpms to www directory and create repo
+- common: add yum repo (my_zabbix) to all machine and clean cash
+- selinux: make mode permissive
+- install_requirements: install epel-release , disable php repo
+- install_php: install php pkgs and config time in php.ini
+- install_mariadb: install and configure mariadb
+- create_db: create database for zabbix
+- install_zabbix: install zabbix pkgs in local (['zabbix-server-mysql','zabbix-web-mysql','zabbix-agent','zabbix-get'])
+- install_pkgs_client: install zabbix client pkgs on the client
+- install_pkgs_server: install zabbix server pkgs on the server
+- conf_zabbix:
+              1- Edit the Zabbix Apache configuration file.
+              2- Import the MySQL dump file (this file installed with zabbix pkg)
+              3- Modify the Zabbix configuration file with Database details.
+              4- Modify firewall rules:
+                      * add http, https services
+                      * add 10051, 10050 ports
