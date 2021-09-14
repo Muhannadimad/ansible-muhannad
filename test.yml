@@ -1,0 +1,13 @@
+--- 
+
+- hosts: local
+  name: include from external variable
+  tasks:
+    - name: include default step variables
+      include_vars: 
+        file: myvars.yml
+
+    - debug:
+        var: DBUser 
+
+

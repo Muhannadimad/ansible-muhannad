@@ -1,6 +1,0 @@
----
-
-- hosts: local
-  name: install requirements
-  roles:
-    - install_requirements

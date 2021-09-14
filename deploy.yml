@@ -1,0 +1,59 @@
+---
+
+- hosts: local
+  become: true
+  name: httpd
+  roles:
+    - apache
+    - local
+
+- hosts: all
+  become: true
+  roles:
+    - common
+
+- hosts: local
+  name: change selinux 
+  roles:
+    - selinux 
+
+- hosts: local
+  name: install requirements
+  roles:
+    - install_requirements
+
+- hosts: local 
+  name: install php pkgs
+  roles:
+    - install_php 
+
+- hosts: local
+  name: install mariadb
+  tags: mariadb
+  roles:
+    - install_mariadb
+
+- hosts: local
+  name: create DB
+  roles:
+    - create_db
+
+- hosts: local
+  name: install zabbix 
+  roles: 
+    - install_zabbix
+
+- hosts: zabbix_server
+  become: true
+  roles: 
+    - install_pkgs_server
+
+- hosts: zabbix_agent
+  become: true
+  roles: 
+    - install_pkgs_client
+
+- hosts: local
+  name: configure zabbix
+  roles:
+    - conf_zabbix

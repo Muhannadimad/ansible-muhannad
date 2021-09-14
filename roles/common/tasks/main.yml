@@ -8,9 +8,4 @@
 
 
 - name: clean yum cash
-  command: yum clean all 
-
- 
-
-
-
+  command: yum clean all

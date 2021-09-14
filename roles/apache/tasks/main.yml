@@ -1,5 +1,5 @@
 - name: Install apache using yum
-  yum: 
+  yum:
     name: httpd
     state: latest
 
@@ -11,10 +11,16 @@
 - name: Enable httpd service on system boot
   command: systemctl enable httpd
 
-- name: Open port 80 for http access
+- name: add http service to firewall
   firewalld:
     service: http
     permanent: true
     state: enabled
-  notify: restart_firewall 
+  notify: restart_firewall
 
+- name: open port 80 for http
+  firewalld:
+    port: 80/tcp
+    permanent: yes
+    state: enabled
+  notify: restart_firewall

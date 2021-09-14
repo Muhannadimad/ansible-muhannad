@@ -17,11 +17,20 @@
      state: present
 
 
-- name: import sql file
-  tags: sql
-  shell: 
-    chdir: /usr/share/doc/zabbix-server-mysql-4.0.33/ 
-    cmd: zcat create.sql.gz |  mysql -u muhannad -p1212 zabbix_db
+#- name: import sql file
+#  tags: sql
+#  shell: 
+#    chdir: /usr/share/doc/zabbix-server-mysql-4.0.33/ 
+#    cmd: zcat create.sql.gz |  mysql -u muhannad -p1212 zabbix_db
+
+- name: Restore database
+  community.mysql.mysql_db:
+    name: my_db
+    login_user: muhannad
+    login_password: 1212
+    state: present
+    target: /usr/share/doc/zabbix-server-mysql-4.0.33/create.sql.gz
+
 
 
 #- name: edit zabbix config 
