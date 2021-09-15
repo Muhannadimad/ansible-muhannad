@@ -1,4 +1,12 @@
-DBRootPassword: 121212
-DBUser: muhannad
+# Root user
+DBRootPassword: root_password
+
+# Mysql user vars
+DBUser: user1
 DBUserPsssword: 1212
+
+
+
+# Database vars
 DBName: zabbix_db
+DBPassword:

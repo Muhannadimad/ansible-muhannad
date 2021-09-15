@@ -1,37 +1,54 @@
+- name: include default step variables
+  include_vars:
+    file: myvars.yml
+
 - name: Install mariaDB
-  yum: 
+  yum:
     name: mariadb-server
     disablerepo: "*"
     enablerepo: "remi"
 
-
 - name: Start the MariaDB service
-  service: 
+  service:
     name: mariadb.service
     state: started
 
 - name: Enable MariaDB on system boot.
   command: systemctl enable mariadb
 
-#- name: mariadb more secure 
-#  shell: mysql_secure_installation --password-stdin 
+#- name: mariadb more secure
+#  shell: mysql_secure_installation --password-stdin
 #  args:
 #    stdin: 1212
 
-- name: Case insensitive password string match
-  tags: password
-  vars: 
-    ansible_python_interpreter: /usr/bin/python3
-  expect:
-    command: echo | mysql_secure_installation
-    responses:
-       Question:
-         - 121212
-         - echo
-         - y
-         - 1212
-         - 1212
-         - y 
-         - n
-         - n
-         - y
+- name: see DBPassword
+  debug:
+    var: DBRootPassword
+
+# - name: Case insensitive password string match
+#   tags: more_secure
+#   vars:
+#     ansible_python_interpreter: /usr/bin/python3
+#   expect:
+#     command: echo | mysql_secure_installation
+#     responses:
+#       Question:
+#         # - echo
+#         # - y
+#         # - "{{DBRootPassword}}"
+#         - "{{DBRootPassword}}"
+#         - y
+#         - n
+#         - n
+#         - y
+# - name: Set root user password
+#   mysql_user:
+#     name: root
+#     password: "{{ DBRootPassword }}"
+#     state: present
+
+
+- name: Creates directory
+  file:
+    path: '{{playbook_dir}}/installed.txt'
+    state: touch
