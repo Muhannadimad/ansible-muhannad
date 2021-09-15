@@ -1,5 +1,5 @@
 - name: install zabbix from myzabbix repo
-  yum: 
+  yum:
     name: ['zabbix-server-mysql','zabbix-web-mysql','zabbix-agent','zabbix-get']
     state: latest
     enablerepo: "my_zabbix"

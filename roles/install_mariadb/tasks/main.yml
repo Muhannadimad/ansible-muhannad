@@ -1,3 +1,16 @@
+- name: Check that the installed file exists
+  stat:
+    path: '{{playbook_dir}}/installed.txt'
+  register: stat_result
+
+- block:
+    - name: "check if already installed"
+      debug:
+        msg: "nothing to install, ending play"
+
+    - meta: end_play
+      when: stat_result.stat.exists
+
 - name: include default step variables
   include_vars:
     file: myvars.yml
@@ -7,6 +20,7 @@
     name: mariadb-server
     disablerepo: "*"
     enablerepo: "remi"
+
 
 - name: Start the MariaDB service
   service:
@@ -41,11 +55,11 @@
 #         - n
 #         - n
 #         - y
-# - name: Set root user password
-#   mysql_user:
-#     name: root
-#     password: "{{ DBRootPassword }}"
-#     state: present
+- name: Set root user password
+  mysql_user:
+    name: root
+    password: "{{ DBRootPassword }}"
+    state: present
 
 
 - name: Creates directory
