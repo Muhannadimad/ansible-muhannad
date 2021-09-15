@@ -1,1 +1,3 @@
 test.yml
+install*.yml
+host_vars
