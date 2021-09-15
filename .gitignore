@@ -1,3 +1,5 @@
 test.yml
 install*.yml
 host_vars
+create_db.yml
+installed.txt
